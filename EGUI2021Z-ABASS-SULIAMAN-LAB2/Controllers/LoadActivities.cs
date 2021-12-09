@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-
+using EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure;
 namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 {
     public class LoadActivities : Controller
@@ -13,9 +12,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
         public string LoadJson()
         {
             string filePath = @"C:\Users\Suliaman\source\repos\EGUI2021Z-ABASS-SULIAMAN-LAB2\EGUI2021Z-ABASS-SULIAMAN-LAB2\JsonFiles";
-            DataStructure.DataBase DB = new DataStructure.DataBase(filePath);
-
-
+            DataBase DB = DataBase.Instance;
+            DB.LoadFromJson(filePath);
             return  String.Join(",",DB.PrintList());
         }
          
