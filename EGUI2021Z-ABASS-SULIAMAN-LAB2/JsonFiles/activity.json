@@ -1,16 +1,18 @@
 {
-    "activities": [
-        {
-            "code": "ARGUS-123 ",
-            "manager": "nowak ",
-            "name": "Argus ",
-            "budget": 125
-        },
-        {
-            "code": "OTHER ",
-            "manager": "smith ",
-            "name": "Other ",
-            "budget": -1
-        }
-    ]
+  "activities": [
+    {
+      "code": "ARGUS-123 ",
+      "name": "Argus ",
+      "manager": "nowak ",
+      "active": false,
+      "budget": 125
+    },
+    {
+      "code": "OTHER ",
+      "name": "Other ",
+      "manager": "smith ",
+      "active": false,
+      "budget": -1
+    }
+  ]
 }

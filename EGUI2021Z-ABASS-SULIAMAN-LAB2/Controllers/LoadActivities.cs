@@ -9,12 +9,15 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View();
         }
 
-        public string LoadJson()
+        public void LoadJson()
         {
-            string filePath = @"C:\Users\Suliaman\source\repos\EGUI2021Z-ABASS-SULIAMAN-LAB2\EGUI2021Z-ABASS-SULIAMAN-LAB2\JsonFiles";
-            DataBase DB = DataBase.Instance;
-            DB.LoadFromJson(filePath);
-            return  String.Join(",",DB.PrintList());
+            //string filePath = @"C:\Users\Suliaman\source\repos\EGUI2021Z-ABASS-SULIAMAN-LAB2\EGUI2021Z-ABASS-SULIAMAN-LAB2\JsonFiles";
+            //DataBase DB = DataBase.Instance;
+            //DB.LoadFromJson(filePath);
+            //return  String.Join(",",DB.PrintList());
+            DataBase.Instance.SaveToJson();
+            //RedirectToAction(controllerName:"Home",actionName:"Index");
+
         }
          
     }

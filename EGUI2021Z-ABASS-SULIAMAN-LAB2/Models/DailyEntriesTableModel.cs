@@ -20,7 +20,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Models
         {
             foreach(Entry entry in DataBase.Instance.GetEntries())
             {
-                // if entry.date == session.dateSelected then 
                 if(entry.date == dateString)
                 {
                     var toAdd = new DailyEntriesTableDB(entry.date, entry.code, entry.time, entry.description);

@@ -18,8 +18,12 @@
             <td>@d.date</td>  
             <td>@d.code</td>  
             <td>@d.time</td>  
-            <td>@d.description</td>  
- 
+            <td>@d.description</td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@d.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@d.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@d.Id">Delete</a>
+    </td>
   
         </tr>  
     }  

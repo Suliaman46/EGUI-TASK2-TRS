@@ -8,16 +8,18 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["currentDate"] = DateTime.Now.ToString("yyyy-MM-dd");
             return View();
         }
-
-        public IActionResult AddEntry(string date, string code, string time, string description)
+        [HttpPost]
+        public IActionResult  AddEntry(string date, string code, string time, string description)
         {
             DataBase.Instance.AddEntry(date, code, Int32.Parse(time), description);
-            //string debugString = "0; URL=https://localhost:7256/DailyEntriesTable/ShowTable?dateString=" + date;
-            //string quote = "\"";
-            //ViewData["redirect"] = System.Web.HttpUtility.HtmlEncode(quote+"0; URL=https://localhost:7256/DailyEntriesTable/ShowTable?dateString=" + date + quote);
-            return View();
+            return RedirectToAction(actionName:"Welcome",controllerName:"Home", new
+            {
+                dateString = date,
+                deb = 0,
+            });
         }
     }
 }

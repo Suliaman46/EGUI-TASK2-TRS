@@ -9,26 +9,35 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
         public static DataBase Instance { get { return lazy.Value; } }
         public ActivitiesList? activitiesList { get; set; }
         public List<User> users { get; set; } = new List<User>();
-
+        public string sessionUserName { get; set; }
+        public string pathToJsonDirectory { get; set; }
         public DataBase()
         {
 
         }
 
-        public DataBase(string filePath)
-        {
-            this.LoadFromJson(filePath);
-        }
 
-        public void LoadFromJson(string filePath)
+        public void LoadFromJson()
         {
-            activitiesList = JsonConvert.DeserializeObject<ActivitiesList>(File.ReadAllText(filePath + @"\activity.json"));
+            activitiesList = JsonConvert.DeserializeObject<ActivitiesList>(File.ReadAllText(pathToJsonDirectory + @"\activity.json"));
 
             User userToAdd = new User();
             userToAdd.Name = "kowalski";
-            string test = filePath + @"\Users\" + userToAdd.Name;
+            string test = pathToJsonDirectory + @"\Users\" + userToAdd.Name;
             userToAdd.read(test);
             users.Add(userToAdd);
+        }
+
+        public void SaveToJson()
+        {
+            string json = JsonConvert.SerializeObject(activitiesList, Formatting.Indented);
+            File.WriteAllText(pathToJsonDirectory + @"\activity.json",json);
+
+            foreach(User user in users)
+            {
+                user.write(pathToJsonDirectory + @"\Users\" + user.Name);
+            }
+            
         }
 
         public List<string> PrintList()
@@ -42,8 +51,10 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 
             foreach(var user in users)
             {
-                // if (user) == session user then
-                return user.GetEntries();
+                if(user.Name == DataBase.Instance.sessionUserName)
+                {
+                    return user.GetEntries();
+                }
             }
 
             return null;
@@ -58,6 +69,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
                 user.AddEntry(date, code, time, description);
             }
         }
+
+        public 
         
     }
 }

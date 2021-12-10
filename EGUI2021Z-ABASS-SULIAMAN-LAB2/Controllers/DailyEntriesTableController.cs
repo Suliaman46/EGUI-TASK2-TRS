@@ -8,9 +8,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 
         public IActionResult Index()
         {
-
-            //DailyEntriesTableModel dailyEntriesTableModel = new DailyEntriesTableModel();
-            //return View(dailyEntriesTableModel.Entries);
             return View();
         }
 

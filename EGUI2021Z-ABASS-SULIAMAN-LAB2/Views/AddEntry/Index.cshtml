@@ -3,10 +3,10 @@
 *@
 @{
 }
-<form action="https://localhost:7256/AddEntry/AddEntry" method="GET">
+<form action="https://localhost:7256/AddEntry/AddEntry" method="POST">
   <div>
     <label for="say">Date: </label>
-    <input name="date" id="dateString" value="yyyy-mm-dd">
+    <input name="date" id="dateString" value=@ViewData["currentDate"]>
   </div>
   <div>
     <label for="to">Code: </label>

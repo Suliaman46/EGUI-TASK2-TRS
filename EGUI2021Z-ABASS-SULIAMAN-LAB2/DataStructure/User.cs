@@ -17,7 +17,18 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
             monthToAdd.monthYear = monthYear;
             monthlyReports.Add(monthToAdd);
         }
+        
+        public void write(string filePath)
+        {
+            string fileName = "kowalski-2021-11.json";
+            string jsonFilePath = filePath + @"\" + fileName;
+            foreach(Month report in monthlyReports)
+            {
+                string json = JsonConvert.SerializeObject(report, Formatting.Indented);
+                File.WriteAllText(jsonFilePath, json);
 
+            }
+        }
         public List<Entry> GetEntries()
         {
             foreach (Month report in monthlyReports)
