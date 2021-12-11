@@ -34,8 +34,12 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
             foreach (Month report in monthlyReports)
             {
                 // if report.monthYear == session.monthYear then
-                return report.Entries;
-            }
+                if (report.monthYear == SessionUser.Instance.date)
+                {
+                    return report.Entries;
+                }
+
+        }
             return null;
 
         }
@@ -47,9 +51,38 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
                 if(report.monthYear == date.Remove(7))
                 {
                     report.AddEntry( date, code, time,description);
+                    return;
                 }
             }
+            
+            //IF FIRST ENTRY OF MONTH
+            Month monthToAdd = new Month();
+            monthToAdd.monthYear = date.Remove(7);
+            monthToAdd.AddEntry(date, code, time, description);
+            monthlyReports.Add(monthToAdd);
         }
 
+
+        public Entry GetEntry(int count)
+        {
+            foreach (Month report in monthlyReports)
+            {
+                if(report.monthYear == SessionUser.Instance.date)
+                {
+                    int i = 0;
+                    foreach (Entry entry in report.Entries)
+                    {
+                        if(i==count)
+                        {
+                            return entry;
+                        }
+                        i++;
+                    }
+                }
+
+            }
+
+            return null;
+        }
     }
 }

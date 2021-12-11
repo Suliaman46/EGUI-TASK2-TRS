@@ -18,15 +18,19 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Models
 
         private void AddData(string dateString)
         {
-            foreach(Entry entry in DataBase.Instance.GetEntries())
+            if(DataBase.Instance.GetEntries()!= null )
             {
-                if(entry.date == dateString)
+                foreach (Entry entry in DataBase.Instance.GetEntries())
                 {
-                    var toAdd = new DailyEntriesTableDB(entry.date, entry.code, entry.time, entry.description);
-                    entries.Add(toAdd);
-                }
+                    if (entry.date == dateString)
+                    {
+                        var toAdd = new DailyEntriesTableDB(entry.date, entry.code, entry.time, entry.description);
+                        entries.Add(toAdd);
+                    }
 
+                }
             }
+
             
         }
 

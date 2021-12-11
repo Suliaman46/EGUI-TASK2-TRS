@@ -29,12 +29,6 @@
       "code": "ARGUS-123",
       "time": 45,
       "description": "project meeting "
-    },
-    {
-      "date": "2021-11-11",
-      "code": "mycode",
-      "time": 0,
-      "description": "testing"
     }
   ]
 }

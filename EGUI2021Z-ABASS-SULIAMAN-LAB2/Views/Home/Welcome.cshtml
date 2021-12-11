@@ -9,7 +9,7 @@
 </div>
 
 
-<form action="https://localhost:7256/Home/Welcome" method="GET">
+@*<form action="https://localhost:7256/Home/Welcome" method="GET">
   <div>
     <label for="say">Please Select Date : </label>
     <input name="dateString" id="dateString" value="yyyy-mm-dd">
@@ -17,7 +17,20 @@
   <div>
     <button>Show Table</button>
   </div>
-</form>
+</form>*@
+
+
+</div>
+     <form asp-controller="Home" asp-action="Welcome" method= "GET">
+     @*<form action="https://localhost:7256/Home/Welcome" method="POST">*@
+        <input class="datefield" data-val="true" data-val-required="Date is required"
+            id="DisplayDate" name="DisplayDate" type="date" />
+    <button>Show Table</button>
+        </form>
+</div>
+
+
+
 
 @*<div>
     @Html.Partial("~/Views/Shared/EditorTemplates/_Date.cshtml")
@@ -29,7 +42,8 @@
         <th>Code</th>  
         <th>Time</th>  
         <th>Description</th>  
-    </tr>  
+    </tr> 
+    @{int i = 0;}
     @foreach (var d in Model)  
     {  
         <tr>  
@@ -37,8 +51,26 @@
             <td>@d.code</td>  
             <td>@d.time</td>  
             <td>@d.description</td>  
- 
-  
+            <td>
+                <a asp-action="TestEdit" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-75">Edit</a>  
+            </td>
         </tr>  
+        i++;
     }  
 </table>
+<script type="text/javascript">
+
+
+
+@*<script>  *@
+$(function ()  
+{  
+    $('#txtDatePicker').datepicker(  
+    {  
+        dateFormat: 'dd/mm/yy',  
+        changeMonth: true,  
+        changeYear: true,  
+        yearRange: '1950:2100'  
+    });  
+})  
+</script>  
