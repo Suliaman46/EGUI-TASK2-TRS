@@ -9,21 +9,31 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 
         public void read(string filePath)
         {
-            string fileName = "kowalski-2021-11.json";
-            string jsonFilePath = filePath + @"\" + fileName;
-            string monthYear = fileName.Remove(0, 9);
-            monthYear = monthYear.Remove(7);
-            Month monthToAdd = JsonConvert.DeserializeObject<Month>(File.ReadAllText(jsonFilePath));
-            monthToAdd.monthYear = monthYear;
-            monthlyReports.Add(monthToAdd);
+            var jsonFiles = Directory.GetFiles(filePath,"*.json");
+            if (jsonFiles.Length == 0)
+            {
+            }
+            foreach (string jsonFilePath in jsonFiles)
+            {
+                string fileNametest = new DirectoryInfo(jsonFilePath).Name;
+                string monthYear = fileNametest.Substring(fileNametest.Length - 12);
+                monthYear = monthYear.Remove(7);
+                Month monthToAdd = JsonConvert.DeserializeObject<Month>(File.ReadAllText(jsonFilePath));
+                monthToAdd.monthYear = monthYear;
+                monthlyReports.Add(monthToAdd);
+
+
+            }
+
         }
         
         public void write(string filePath)
         {
-            string fileName = "kowalski-2021-11.json";
-            string jsonFilePath = filePath + @"\" + fileName;
+            var jsonFiles = Directory.GetFiles(filePath, "*.json");
             foreach(Month report in monthlyReports)
             {
+                string fileName = this.Name + @"-"+report.monthYear+".json";
+                string jsonFilePath = filePath + @"\" + fileName;
                 string json = JsonConvert.SerializeObject(report, Formatting.Indented);
                 File.WriteAllText(jsonFilePath, json);
 
@@ -33,8 +43,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
         {
             foreach (Month report in monthlyReports)
             {
-                // if report.monthYear == session.monthYear then
-                if (report.monthYear == SessionUser.Instance.date)
+                if (report.monthYear == SessionUser.Instance.date.ToString("yyyy-MM"))
                 {
                     return report.Entries;
                 }
@@ -67,22 +76,38 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
         {
             foreach (Month report in monthlyReports)
             {
-                if(report.monthYear == SessionUser.Instance.date)
+                if(report.monthYear == SessionUser.Instance.date.ToString("yyyy-MM"))
                 {
                     int i = 0;
                     foreach (Entry entry in report.Entries)
                     {
-                        if(i==count)
+                        if(entry.date == SessionUser.Instance.date.ToString("yyyy-MM-dd"))
                         {
-                            return entry;
+                            if (i == count)
+                            {
+                                return entry;
+                            }
+                            i++;
                         }
-                        i++;
+
                     }
                 }
 
             }
 
             return null;
+        }
+
+        public void DeleteEntry(int id)
+        {
+            foreach (Month report in monthlyReports)
+            {
+                if (report.monthYear == SessionUser.Instance.date.ToString("yyyy-MM"))
+                {
+                    report.DeleteEntry(id);
+                }
+
+            }
         }
     }
 }

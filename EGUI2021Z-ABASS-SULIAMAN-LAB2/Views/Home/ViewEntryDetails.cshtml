@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model EGUI2021Z_ABASS_SULIAMAN_LAB2.Models.ViewEntryDetailsModel
+
+    <table class="table table-bordered table-responsive table-hover" style = "font-size:110%">  
+    @*<tr>  *@
+        <tbody id= "section1">
+            <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="4">Entry Details</th></tr>
+            <tr>
+                <th style="text-align:center">Date </th>  
+                <th style="text-align:center">Code</th>  
+                <th style="text-align:center">Time</th>  
+                <th style="text-align:center">Description</th>
+            </tr>
+            <tr>  
+                <td style="text-align:center" >@Model.date</td>  
+                <td style="text-align:center">@Model.code</td>  
+                <td style="text-align:center">@Model.time</td>  
+                <td style="text-align:center">@Model.description</td>  
+            </tr>      
+        </tbody>
+        <tbody = "section2">
+            <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="4">Project Details</th></tr>
+
+            <tr>
+                <th style="text-align:center">Name</th>
+                <th style="text-align:center">Manager</th>
+                <th style="text-align:center">Budget</th>
+                <th style="text-align:center">Active</th>
+            </tr>
+
+            <tr>  
+   
+                <td style="text-align:center">@Model.projectName</td>  
+                <td style="text-align:center">@Model.projectManager</td>  
+                <td style="text-align:center">@Model.projectBudget</td>  
+                <td style="text-align:center">@Model.projectActive</td>  
+            </tr>  
+        </tbody>
+       
+    </table>

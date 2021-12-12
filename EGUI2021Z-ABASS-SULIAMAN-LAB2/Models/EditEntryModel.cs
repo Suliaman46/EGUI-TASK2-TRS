@@ -12,6 +12,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Models
         public string description { get; set; }
 
         public int count { get;  set; }
+
+        public List<string> codeList { get; set; }      
         public EditEntryModel(string date, string code, int time, string decription, int count)
         {
             this.date = date;

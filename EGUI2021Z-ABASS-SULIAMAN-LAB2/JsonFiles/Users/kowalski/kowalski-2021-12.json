@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "date": "2021-12-12",
+      "code": "ARGUS-123",
+      "time": 50,
+      "description": "test "
+    },
+    {
+      "date": "2021-12-12",
+      "code": "mycode",
+      "time": 10,
+      "description": "testing"
+    }
+  ]
+}

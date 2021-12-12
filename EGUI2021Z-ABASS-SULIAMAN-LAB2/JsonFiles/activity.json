@@ -1,14 +1,14 @@
 {
   "activities": [
     {
-      "code": "ARGUS-123 ",
+      "code": "ARGUS-123",
       "name": "Argus ",
       "manager": "nowak ",
       "active": false,
       "budget": 125
     },
     {
-      "code": "OTHER ",
+      "code": "OTHER",
       "name": "Other ",
       "manager": "smith ",
       "active": false,

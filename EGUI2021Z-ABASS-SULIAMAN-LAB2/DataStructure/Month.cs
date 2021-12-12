@@ -19,7 +19,25 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
         }
 
  
+        public void DeleteEntry(int id)
+        {
+            int countMonthly = 0;
+            int count = 0;
+            foreach (Entry entry in entries)
+            {
+                if (entry.date == SessionUser.Instance.date.ToString("yyyy-MM-dd"))
+                {
+                    if (count == id)
+                    {
+                        break;
+                    }
+                    count++;
+                }
+                countMonthly++;
+            }
+            entries.RemoveAt(countMonthly);
 
+        }
 
     }
 }

@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    ViewData["Title"] = "Add Activity";
+}
+
+<form method = "POST" asp-action="AddActivity">
+    <div class="border p-4 border-primary">
+
+        <div class:"form-group row">
+            <h2 class="text-black-70 pl-3">Add Entry</h2>
+        </div>
+        <div class = "col-md-6">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Code :   </span>
+                </div>
+                <input type="text" class="form-control" id="code" name = "code">
+                @*<input asp-for="code" type="text" class="form-control" >*@
+            </div>
+        </div>
+            
+        <div class = "col-md-6">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name :   </span>
+                </div>
+                <input type="text" class="form-control" id="name" name = "name">
+                @*<input asp-for="time" type="text" class="form-control">*@
+            </div>
+        </div>
+
+        <div class = "col-md-6" >
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Manager :   </span>
+                </div>
+                <input type="text" class="form-control" id="manager" name = "manager">
+                @*<input asp-for="manager" type="text" class="form-control">*@
+            </div>
+        </div>
+        <div class = "col-md-6" >
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Active :   </span>
+                </div>
+                <input type="text" class="form-control" id="active" name = "active">
+                @*<input asp-for="active" type="text" class="form-control" >*@
+            </div>
+        </div>
+        <div class = "col-md-6" >
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Budget :   </span>
+                </div>
+                <input type="text" class="form-control" id="budget" name = "budget">
+                @*<input asp-for="budget" type="text" class="form-control">*@
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-8 offset-2 row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary w-75" value="Submit" />
+                </div>
+                <div class="col">
+                    <a asp-action="Welcome" class="btn btn-warning  w-75">Back</a>
+                </div>
+            </div>
+        </div>
+</form>
+

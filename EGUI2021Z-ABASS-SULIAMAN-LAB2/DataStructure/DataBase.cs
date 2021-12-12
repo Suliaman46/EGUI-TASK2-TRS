@@ -19,13 +19,41 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 
         public void LoadFromJson()
         {
+            // Reads Activities from activity.json
             activitiesList = JsonConvert.DeserializeObject<ActivitiesList>(File.ReadAllText(pathToJsonDirectory + @"\activity.json"));
+            // Need to go to "pathToJsonDirectory\Users\
+            //Iterate over each folder in the users folder and then do the following:
+            bool sessionUserFound = false;
+            var userFolders = Directory.GetDirectories(pathToJsonDirectory + @"\Users");
+            if(userFolders.Length ==0)
+            {
+                //TODO NO USER Folder found 
+                //Hence create User Folder
+            }
+            foreach(string userFolderName in userFolders)
+            {
+                
+                string userName = new DirectoryInfo(userFolderName).Name;
+                if (userName == SessionUser.Instance.userName)
+                    sessionUserFound = true ;
+                User userToAdd = new User();
+                userToAdd.Name = userName;
+                userToAdd.read(userFolderName);
+                users.Add(userToAdd);
+            }
 
-            User userToAdd = new User();
-            userToAdd.Name = "kowalski";
-            string test = pathToJsonDirectory + @"\Users\" + userToAdd.Name;
-            userToAdd.read(test);
-            users.Add(userToAdd);
+            if(!sessionUserFound)
+            {
+                // If the session User does not have a folder
+                string userFolder = pathToJsonDirectory + @"\Users\" + SessionUser.Instance.userName;
+                Directory.CreateDirectory(userFolder);
+                string userName = new DirectoryInfo(userFolder).Name;
+                User userToAdd = new User();
+                userToAdd.Name = userName;
+                userToAdd.read(userFolder);
+                users.Add(userToAdd);
+
+            }
         }
 
         public void SaveToJson()
@@ -68,7 +96,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
             // if user.name == sessionuser.name
             foreach(User user in users)
             {
-                user.AddEntry(date, code, time, description);
+                if(user.Name ==SessionUser.Instance.userName)
+                    user.AddEntry(date, code, time, description);
             }
         }
 
@@ -90,18 +119,53 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
             }
         }
 
+        public void DeleteEntry(int id)
+        {
+            {
+                foreach (User user in users)
+                {
+                    if (user.Name == SessionUser.Instance.userName)
+                    {
 
-        public Entry? GetEntry(int count)
+                        user.DeleteEntry(id);
+                        //user.GetEntry(count).time = time;
+                        //user.GetEntry(count).description = description;
+                    }
+
+                }
+            }
+        }
+
+        public Entry? GetEntry(int id)
         {
             foreach(User user in users)
             {
-                return user.GetEntry(count);
+                if(user.Name == SessionUser.Instance.userName)
+                {
+                    return user.GetEntry(id);
+
+                }
+
             }
 
             return null;
         }
 
-         
+        public List<string> GetCodeList()
+        {
+            List<string> toReturn = new List<string>();
+            return activitiesList.GetCodeList();
+        }
+
+         public void AddActivity(string code,string name,string manager,bool active,int budget)
+        {
+            activitiesList.AddActivity(code, name, manager, active, budget);
+        }
+
+        public List<string> GetProjectDetails(string code)
+        {
+            return activitiesList.GetProjectDetails(code);
+        }
         
     }
 }

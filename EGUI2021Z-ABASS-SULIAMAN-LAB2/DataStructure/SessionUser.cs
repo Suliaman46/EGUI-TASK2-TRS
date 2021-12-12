@@ -7,7 +7,7 @@
         public static SessionUser Instance { get { return lazy.Value; } }
 
         public string userName { get; set; }
-        public string? date { get; set; }
+        public DateTime date { get; set; }
 
     }
 }

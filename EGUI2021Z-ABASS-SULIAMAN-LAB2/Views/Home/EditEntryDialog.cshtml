@@ -11,43 +11,96 @@
     ViewData["Title"] = "EditEntry";
 }
 
-<form method="Home" asp-action="TestEditEntry">
-    <div class="border p-3">
+<form method = "POST" asp-action="EditEntry">
+    <div class="border p-4 border-primary">
+
         <div class:"form-group row">
-            <h2 class="text-black-50 pl-3">Edit Entry</h2>
+            <h2 class="text-black-70 pl-3">Edit Entry</h2>
         </div>
-        <div class="input-group mb-3">
+
+        <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <span class="input-group-text">Code :   </span>
             </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+@*            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Active Codes
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item-text" href="#">Link 1</a>
+                        <a class="dropdown-item-text" href="#">Link 2</a>
+                        <a class="dropdown-item-text" href="#">Link 3</a>
+                  </div>
+                </div>
+            </div>*@
 
+
+
+             <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" >
+                    Active Codes
+                </button>
+                <div class="dropdown-menu" >
+                    @foreach(var d in Model.codeList)
+                    {
+                       @*<span class="dropdown-item-text">@d</span>*@
+                       @* <a class="dropdown-item-text" href="#">@d</a>*@
+                        <li><a tabindex="-1" href="#">@d</a></li>
+
+                    }
+
+
+@*                    <a class="dropdown-item-text" href="#">Link 1</a>
+                        <a class="dropdown-item-text" href="#">Link 2</a>
+                        <a class="dropdown-item-text" href="#">Link 3</a>*@
                 </div>
             </div>
+
+
+@*
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Link 1</a>
+              <a class="dropdown-item" href="#">Link 2</a>
+              <a class="dropdown-item" href="#">Link 3</a>
+            </div>
+          </div>*@
+
+
         </div>
-            <div class="input-group mb-3">
+
+        <div class = "col-md-6">
+            <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Code :   </span>
                 </div>
                 <input asp-for="code" type="text" class="form-control" placeholder="(Model.code)">
             </div>
-            <div class="input-group mb-3">
+        </div>
+            
+        <div class = "col-md-6">
+            <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Time :   </span>
                 </div>
                 <input asp-for="time" type="text" class="form-control" placeholder="(Model.time)">
             </div>
+        </div>
+
+        <div class = "col-md-6" >
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Description :   </span>
                 </div>
                 <input asp-for="description" type="text" class="form-control" placeholder="(Model.description)">
             </div>
+        </div>
+
+
             
         @*    <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -56,7 +109,9 @@
                 <input asp-for="description" type="text" class="form-control" placeholder="(Model.description)">
             </div> 
             <div>*@
+            <div>
                 <input asp-for="count" type="hidden" class="form-control" placeholder="(Model.count)"> 
+                <input asp-for="date" type="hidden" class="form-control" placeholder="(Model.date)"> 
             </div>
 
             @*
@@ -83,11 +138,21 @@
         <div class="form-group row">
             <div class="col-8 offset-2 row">
                 <div class="col">
-                    <input type="submit" class="btn btn-info w-75" value="Add" />
+                    <input type="submit" class="btn btn-primary w-75" value="Submit" />
                 </div>
                 <div class="col">
-                    <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                    <a asp-action="Welcome" class="btn btn-warning  w-75">Back</a>
                 </div>
             </div>
         </div>
 </form>
+
+
+    <script>
+    $(document).ready(function () {
+        $('#pickButton').dropdown();
+        $('#selectionDropdown li').on('click', function() {
+            $('#dropdown_title').html($(this).find('a').html());
+        });​
+    });
+    </script>

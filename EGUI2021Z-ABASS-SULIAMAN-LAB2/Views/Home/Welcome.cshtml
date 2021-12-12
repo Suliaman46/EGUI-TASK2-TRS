@@ -1,12 +1,8 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+-moz-text-size-adjust{
 }
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
 
 
 @*<form action="https://localhost:7256/Home/Welcome" method="GET">
@@ -19,58 +15,92 @@
   </div>
 </form>*@
 
-
+<div class="text-center">
+    <h1 class="display-10">Entries for @ViewData["date"] </h1>
 </div>
+
+<div class="input-group mb-2">
      <form asp-controller="Home" asp-action="Welcome" method= "GET">
-     @*<form action="https://localhost:7256/Home/Welcome" method="POST">*@
         <input class="datefield" data-val="true" data-val-required="Date is required"
-            id="DisplayDate" name="DisplayDate" type="date" />
-    <button>Show Table</button>
+            id="DisplayDate" name="DisplayDate" type="date" value = "2021-12-12" />
+    <button class = "btn-primary btn-primary ">Show Table</button>
         </form>
 </div>
 
+ 
+@*<table class="table table-bordered table-responsive table-hover" style = "font-size:130%">  
+      
 
-
-
-@*<div>
-    @Html.Partial("~/Views/Shared/EditorTemplates/_Date.cshtml")
-</div>*@
-
-<table class="table table-bordered table-responsive table-hover">  
-    <tr>  
-        <th>Date </th>  
-        <th>Code</th>  
-        <th>Time</th>  
-        <th>Description</th>  
-    </tr> 
-    @{int i = 0;}
-    @foreach (var d in Model)  
-    {  
         <tr>  
-            <td>@d.date</td>  
-            <td>@d.code</td>  
-            <td>@d.time</td>  
-            <td>@d.description</td>  
-            <td>
-                <a asp-action="TestEdit" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-75">Edit</a>  
-            </td>
-        </tr>  
-        i++;
-    }  
+            <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Entry Details</th></tr>
+            <th style="text-align:center">Date </th>  
+            <th style="text-align:center">Code</th>  
+            <th style="text-align:center">Time</th>  
+            <th style="text-align:center">Description</th>
+            <th style="text-align:center">Actions</th>
+        </tr> 
+        @{int i = 0;}
+        @foreach (var d in Model)  
+        {  
+            <tr>  
+                <td style="text-align:center" >@d.date</td>  
+                <td style="text-align:center">@d.code</td>  
+                <td style="text-align:center">@d.time</td>  
+                <td style="text-align:center">@d.description</td>  
+                <td style="text-align:center">
+                    <div class ="btn-group btn-group-lg">
+                        <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
+                        <a asp-action="TestDelete" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
+                        <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
+                    </div>
+                </td>
+            </tr>  
+            i++;
+        }
+</table>*@
+
+
+
+<table class="table table-bordered table-responsive table-hover" style = "font-size:110%">  
+    <tbody id= "section1">
+        <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Entry Details</th></tr>
+        <tr>
+            <th style="text-align:center">Date </th>  
+            <th style="text-align:center">Code</th>  
+            <th style="text-align:center">Time</th>  
+            <th style="text-align:center">Description</th>
+            <th style="text-align:center">Actions</th>
+        </tr>
+        @{
+            int i = 0;
+            int totalTime =0;  
+        }
+        @foreach (var d in Model)  
+        {  
+            <tr>  
+                <td style="text-align:center" >@d.date</td>  
+                <td style="text-align:center">@d.code</td>  
+                <td style="text-align:center">@d.time</td>  
+                <td style="text-align:center">@d.description</td>  
+                <td style="text-align:center">
+                    <div class ="btn-group btn-group-lg">
+                        <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
+                        <a asp-action="TestDelete" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
+                        <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
+                    </div>
+                </td>
+            </tr>
+            i++;
+            totalTime += @d.time;
+        }    
+    </tbody>
+    <tbody = "section2">
+        <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Total Time Today : </th></tr>
+        <tr style="text-align:center" class="grouplabel "><th colspan="5">@totalTime</th></tr>
+
+      
+    </tbody>
+       
 </table>
-<script type="text/javascript">
 
 
-
-@*<script>  *@
-$(function ()  
-{  
-    $('#txtDatePicker').datepicker(  
-    {  
-        dateFormat: 'dd/mm/yy',  
-        changeMonth: true,  
-        changeYear: true,  
-        yearRange: '1950:2100'  
-    });  
-})  
-</script>  

@@ -1,29 +1,73 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@{
+    Layout = null;
+ }
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
 
-@*<div>
-    <form action="https://localhost:7256/Home/Welcome" method="POST">
-  <div>
-    <label for="userName">Please Enter User Name: </label>
-    <input name="userName" id="userName" value="">
-  </div>
-  <div>
-    <button>Login</button>
-   <button type="button" class="btn btn-primary">Login</button>
-  </div>
-</form>
-</div>*@
-
-<form action="https://localhost:7256/Home/Welcome" method = "POST">
+@*<form action="https://localhost:7256/Home/Welcome" method = "POST">
   <div class="form-group">
     <label for="userName">Please Enter Your Name:</label>
     <p><input type="text" class="form-control" id="userName" name = "userName"></p>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form>*@
+
+
+@*
+<div class="container">
+    <div class="form-inline ">
+        <form method ="POST" asp-controller = "Home" asp-action= "Welcome">
+            <div class="form-group col-5">
+                <label for="userName">Please Enter Your Name:</label>
+                <p><input type="text" class="form-control" id="userName" name = "userName"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+*@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EGUI2021Z_ABASS_SULIAMAN_LAB2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EGUI2021Z_ABASS_SULIAMAN_LAB2.styles.css" asp-append-version="true" />
+</head>
+<body>  
+    <div class="container">
+        <main role="main" class="pb-3">
+
+           <form method="POST"  asp-controller = "Home" asp-action= "Welcome">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div id="alert_placeholder_login"> </div>
+                                <div
+                                    asp-validation-summary="ModelOnly" class="text-danger">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="userName" class="col-md-6">Please Enter Your Name:</label>
+                                    <p><input type="text" class="form-control" id="userName" name = "userName"></p>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+        </main>
+    </div>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
