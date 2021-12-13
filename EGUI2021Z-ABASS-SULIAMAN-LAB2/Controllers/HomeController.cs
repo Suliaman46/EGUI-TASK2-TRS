@@ -35,7 +35,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 
             ViewData["date"] = DateTime.Now.ToString("dd MMMM yyyy");
             DailyEntriesTableModel dailyEntriesTableModel = new DailyEntriesTableModel(DateTime.Now.ToString("yyyy-MM-dd"));
-            return View(dailyEntriesTableModel.Entries);
+            return View(dailyEntriesTableModel);
         }
         [HttpGet]
         public IActionResult Welcome(DateTime Displaydate, int deb = 0)
@@ -47,7 +47,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             SessionUser.Instance.date = Displaydate;
             ViewData["date"] = Displaydate.ToString("dd MMMM yyyy");
             DailyEntriesTableModel dailyEntriesTableModel = new DailyEntriesTableModel(Displaydate.ToString("yyyy-MM-dd"));
-            return View(dailyEntriesTableModel.Entries);
+            //return View(dailyEntriesTableModel.Entries);
+            return View(dailyEntriesTableModel);
         }
 
         public IActionResult AddEntryDialog()
@@ -116,7 +117,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             });
         }
 
-        public IActionResult TestDelete(int id)
+        public IActionResult DeleteEntry(int id)
         {
             DataBase.Instance.DeleteEntry(id);
             return RedirectToAction(actionName: "Welcome", controllerName: "Home", new
@@ -137,7 +138,19 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             }
             return View();
         }
-
+        
+        [HttpGet]
+        public IActionResult MonthlyReport(DateTime DisplayDate)
+        {
+            if (DisplayDate == DateTime.MinValue)
+            {
+                DisplayDate = DateTime.Now;
+            }
+            SessionUser.Instance.date = DisplayDate;
+            ViewData["date"] = DisplayDate.ToString("MMMM yyyy");
+            MonthlyEntriesTableModel monthlyEntriesTableModel = new MonthlyEntriesTableModel(DisplayDate.ToString("yyyy-MM"));
+            return View(monthlyEntriesTableModel);
+        }
         public IActionResult Save()
         {
             DataBase.Instance.SaveToJson();
@@ -158,6 +171,11 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public void test(DateTime datestring)
+        {
+            return;
         }
 
 

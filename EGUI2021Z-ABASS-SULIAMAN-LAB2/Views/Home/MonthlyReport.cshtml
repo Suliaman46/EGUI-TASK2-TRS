@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-10">Entries for @ViewData["date"] </h1>
+</div>
+
+
+<div class="input-group mb-2">
+     <form asp-controller="Home" asp-action="MonthlyReport" method= "GET">
+        <input class="datefield" data-val="true" data-val-required="Date is required"
+            id="DisplayDate" name="DisplayDate" type="date" value =""  ;" />
+    <button class = "btn-primary btn-primary ">Show Table</button>
+        </form>
+</div>
+
+<table class="table table-bordered table-responsive table-hover" style = "font-size:110%">  
+    <tbody id= "section1">
+        <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Entry Details</th></tr>
+        <tr>
+            <th style="text-align:center">Date </th>  
+            <th style="text-align:center">Code</th>  
+            <th style="text-align:center">Time</th>  
+            <th style="text-align:center">Description</th>
+            @*<th style="text-align:center">Actions</th>*@
+        </tr>
+        @{
+            int i = 0;
+        }
+        @foreach (var d in Model.Entries)  
+        {  
+            <tr>  
+                <td style="text-align:center" >@d.date</td>  
+                <td style="text-align:center">@d.code</td>  
+                <td style="text-align:center">@d.time</td>  
+                <td style="text-align:center">@d.description</td>  
+                @*<td style="text-align:center">
+                    <div class ="btn-group btn-group-lg">
+                        <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
+                        <a asp-action="DeleteEntry" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
+                        <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
+                    </div>
+                </td>*@
+            </tr>
+            i++;
+        }    
+    </tbody>
+    <tbody = "section2">
+        <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Total Time This Month : </th></tr>
+        <tr style="text-align:center" class="grouplabel "><th colspan="5">@Model.totalTime</th></tr>
+
+      
+    </tbody>
+       
+</table>

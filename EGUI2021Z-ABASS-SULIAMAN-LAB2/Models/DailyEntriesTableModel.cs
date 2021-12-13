@@ -4,19 +4,25 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Models
 {
     public class DailyEntriesTableModel
     {
-        List<DailyEntriesTableDB> entries = new() ;
+        protected List<DailyEntriesTableDB> entries = new() ;
+        public int totalTime { get; set; }
         
         public List<DailyEntriesTableDB> Entries
         {
             get { return entries; }
         }
 
+        public DailyEntriesTableModel()
+        {
+
+        }
         public DailyEntriesTableModel(string dateString)
         {
+            totalTime = 0;
             AddData(dateString);
         }
 
-        private void AddData(string dateString)
+        protected virtual void AddData(string dateString)
         {
             if(DataBase.Instance.GetEntries()!= null )
             {
@@ -25,6 +31,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Models
                     if (entry.date == dateString)
                     {
                         var toAdd = new DailyEntriesTableDB(entry.date, entry.code, entry.time, entry.description);
+                        totalTime += toAdd.time;
                         entries.Add(toAdd);
                     }
 

@@ -22,12 +22,11 @@
 <div class="input-group mb-2">
      <form asp-controller="Home" asp-action="Welcome" method= "GET">
         <input class="datefield" data-val="true" data-val-required="Date is required"
-            id="DisplayDate" name="DisplayDate" type="date" value = "2021-12-12" />
+            id="DisplayDate" name="DisplayDate" type="date" value =""  ;" />
     <button class = "btn-primary btn-primary ">Show Table</button>
         </form>
 </div>
 
- 
 @*<table class="table table-bordered table-responsive table-hover" style = "font-size:130%">  
       
 
@@ -50,7 +49,7 @@
                 <td style="text-align:center">
                     <div class ="btn-group btn-group-lg">
                         <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
-                        <a asp-action="TestDelete" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
+                        <a asp-action="DeleteEntry" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
                         <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
                     </div>
                 </td>
@@ -58,7 +57,6 @@
             i++;
         }
 </table>*@
-
 
 
 <table class="table table-bordered table-responsive table-hover" style = "font-size:110%">  
@@ -73,9 +71,8 @@
         </tr>
         @{
             int i = 0;
-            int totalTime =0;  
         }
-        @foreach (var d in Model)  
+        @foreach (var d in Model.Entries)  
         {  
             <tr>  
                 <td style="text-align:center" >@d.date</td>  
@@ -85,22 +82,32 @@
                 <td style="text-align:center">
                     <div class ="btn-group btn-group-lg">
                         <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
-                        <a asp-action="TestDelete" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
+                        <a asp-action="DeleteEntry" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
                         <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
                     </div>
                 </td>
             </tr>
             i++;
-            totalTime += @d.time;
         }    
     </tbody>
     <tbody = "section2">
         <tr style="text-align:center" class="grouplabel bg-black text-white"><th colspan="5">Total Time Today : </th></tr>
-        <tr style="text-align:center" class="grouplabel "><th colspan="5">@totalTime</th></tr>
+        <tr style="text-align:center" class="grouplabel "><th colspan="5">@Model.totalTime</th></tr>
 
       
     </tbody>
        
 </table>
 
-
+    <script>
+    $(".date")
+        .datepicker({
+            onSelect: function(dateText) {
+                console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+		        $(this).change();
+		    }
+		})
+        .on("change", function() {
+            console.log("Got change event from field");
+        });
+    </script>
