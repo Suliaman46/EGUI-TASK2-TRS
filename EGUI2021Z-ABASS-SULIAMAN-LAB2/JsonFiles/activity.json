@@ -13,6 +13,13 @@
       "manager": "smith ",
       "active": false,
       "budget": -1
+    },
+    {
+      "code": "mycode",
+      "name": "testProject",
+      "manager": "me",
+      "active": true,
+      "budget": 100
     }
   ]
 }

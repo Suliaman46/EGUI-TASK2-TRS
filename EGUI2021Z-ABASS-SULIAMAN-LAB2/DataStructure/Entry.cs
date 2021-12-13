@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 {

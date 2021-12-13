@@ -5,6 +5,8 @@ using System.Diagnostics;
 
 namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 {
+    // TODO DropDown in Edit and Add Entry // DONE
+    // TODO Data validation for ADD Activity, Add Entry, Edit Entry
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,9 +18,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 
         public IActionResult Index()
         {
-            //string filePath = @"C:\Users\Suliaman\source\repos\EGUI2021Z-ABASS-SULIAMAN-LAB2\EGUI2021Z-ABASS-SULIAMAN-LAB2\JsonFiles";
-            //DataBase DB = DataBase.Instance;
-            //DB.LoadFromJson(filePath);
             return View();
         }
 
@@ -32,7 +31,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             DataBase DB = DataBase.Instance;
             DB.pathToJsonDirectory = filePath;
             DB.LoadFromJson();
-
             ViewData["date"] = DateTime.Now.ToString("dd MMMM yyyy");
             DailyEntriesTableModel dailyEntriesTableModel = new DailyEntriesTableModel(DateTime.Now.ToString("yyyy-MM-dd"));
             return View(dailyEntriesTableModel);
@@ -54,6 +52,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
         public IActionResult AddEntryDialog()
         {
             ViewData["date"] = DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.codeList = DataBase.Instance.GetCodeList();
             return View();
         }
 
@@ -173,11 +172,15 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public void test(DateTime datestring)
+        public void test(string selVal)
         {
             return;
         }
 
+        public IActionResult DropDownTest()
+        {
+            return View();
+        }
 
     }
 }
