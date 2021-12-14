@@ -180,15 +180,5 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public void test(string selVal)
-        {
-            return;
-        }
-
-        public IActionResult DropDownTest()
-        {
-            return View();
-        }
-
     }
 }

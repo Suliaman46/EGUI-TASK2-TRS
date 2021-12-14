@@ -26,7 +26,6 @@
             <th style="text-align:center">Code</th>  
             <th style="text-align:center">Time</th>  
             <th style="text-align:center">Description</th>
-            @*<th style="text-align:center">Actions</th>*@
         </tr>
         @{
             int i = 0;
@@ -38,13 +37,6 @@
                 <td style="text-align:center">@d.code</td>  
                 <td style="text-align:center">@d.time</td>  
                 <td style="text-align:center">@d.description</td>  
-                @*<td style="text-align:center">
-                    <div class ="btn-group btn-group-lg">
-                        <a asp-action="EditEntryDialog" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-warning w-120">Edit</a>  
-                        <a asp-action="DeleteEntry" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-danger w-120">Delete</a>  
-                        <a asp-action="ViewEntryDetails" asp-route-id=@i asp-controller="Home" method = "GET" class="btn btn-info w-120">Details</a>  
-                    </div>
-                </td>*@
             </tr>
             i++;
         }    

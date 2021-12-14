@@ -21,15 +21,8 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
         {
             // Reads Activities from activity.json
             activitiesList = JsonConvert.DeserializeObject<ActivitiesList>(File.ReadAllText(pathToJsonDirectory + @"\activity.json"));
-            // Need to go to "pathToJsonDirectory\Users\
-            //Iterate over each folder in the users folder and then do the following:
             bool sessionUserFound = false;
             var userFolders = Directory.GetDirectories(pathToJsonDirectory + @"\Users");
-            if(userFolders.Length ==0)
-            {
-                //TODO NO USER Folder found 
-                //Hence create User Folder
-            }
             foreach(string userFolderName in userFolders)
             {
                 

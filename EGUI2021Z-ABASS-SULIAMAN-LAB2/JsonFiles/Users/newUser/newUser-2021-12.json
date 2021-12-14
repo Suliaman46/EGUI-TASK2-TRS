@@ -2,9 +2,9 @@
   "entries": [
     {
       "date": "2021-12-14",
-      "code": "mycode",
+      "code": "ARGUS-123",
       "time": 10,
-      "description": "testing"
+      "description": "hello"
     }
   ]
 }

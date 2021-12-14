@@ -19,8 +19,12 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
                 string monthYear = fileNametest.Substring(fileNametest.Length - 12);
                 monthYear = monthYear.Remove(7);
                 Month monthToAdd = JsonConvert.DeserializeObject<Month>(File.ReadAllText(jsonFilePath));
-                monthToAdd.monthYear = monthYear;
-                monthlyReports.Add(monthToAdd);
+                if(monthToAdd != null)
+                {
+                    monthToAdd.monthYear = monthYear;
+                    monthlyReports.Add(monthToAdd);
+                }
+
 
 
             }
