@@ -8,6 +8,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
     public class Entry
     {
         [JsonProperty("date")]
+
         public string date { get; set; }
 
         [JsonProperty("code")]

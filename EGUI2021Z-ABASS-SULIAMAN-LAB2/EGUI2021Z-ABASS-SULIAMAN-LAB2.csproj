@@ -11,7 +11,6 @@
     <PackageReference Include="bootstrap" Version="5.1.2" />
     <PackageReference Include="Bootstrap.Datepicker" Version="1.8.0.1" />
     <PackageReference Include="jQuery" Version="3.6.0" />
-    <PackageReference Include="jQuery.UI.Widgets.Datepicker" Version="1.8.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 

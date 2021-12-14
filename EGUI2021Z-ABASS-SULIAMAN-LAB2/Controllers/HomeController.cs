@@ -1,12 +1,12 @@
 ﻿using EGUI2021Z_ABASS_SULIAMAN_LAB2.Models;
 using EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+
 
 namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
 {
     // TODO DropDown in Edit and Add Entry // DONE
-    // TODO Data validation for ADD Activity, Add Entry, Edit Entry
+    // TODO Data validation for ADD Activity, Add Entry // DONE, Edit Entry // DONE
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -24,7 +24,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
         [HttpPost]
         public IActionResult Welcome(string userName)
         {
-            string filePath = @"C:\Users\Suliaman\source\repos\EGUI2021Z-ABASS-SULIAMAN-LAB2\EGUI2021Z-ABASS-SULIAMAN-LAB2\JsonFiles";
+            string filePath = Directory.GetCurrentDirectory() + @"\JsonFiles";
             SessionUser sessionUser = SessionUser.Instance;
             sessionUser.userName = userName;
             sessionUser.date = DateTime.Now;
@@ -45,7 +45,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             SessionUser.Instance.date = Displaydate;
             ViewData["date"] = Displaydate.ToString("dd MMMM yyyy");
             DailyEntriesTableModel dailyEntriesTableModel = new DailyEntriesTableModel(Displaydate.ToString("yyyy-MM-dd"));
-            //return View(dailyEntriesTableModel.Entries);
             return View(dailyEntriesTableModel);
         }
 
@@ -56,14 +55,23 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View();
         }
 
-        public IActionResult AddEntry(DateTime DisplayDate, string code, string time, string description)
+        [HttpPost]
+        public IActionResult AddEntryDialog(AddEntryDialogModel model)
         {
-            DataBase.Instance.AddEntry(DisplayDate.ToString("yyyy-MM-dd"), code, Int32.Parse(time), description);
+            if (!ModelState.IsValid)
+            {
+                ViewData["date"] = DateTime.Now.ToString("yyyy-MM-dd");
+                ViewBag.codeList = DataBase.Instance.GetCodeList();
+                return View(model);
+
+            }
+            model.AddEntry();
             return RedirectToAction(actionName: "Welcome", controllerName: "Home", new
             {
-                DisplayDate = DisplayDate.ToString("yyyy-MM-dd"),
+                DisplayDate = model.date.ToString("yyyy-MM-dd"),
                 deb = 0,
             });
+
         }
 
         public IActionResult AddActivityDialog()
@@ -72,15 +80,22 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View();
         }
 
-        public IActionResult AddActivity(string code,string name, string manager, string active, string budget)
+        [HttpPost]
+
+        public IActionResult AddActivityDialog(AddActivityDialogModel model)
         {
-            DataBase.Instance.AddActivity(code,name,manager,System.Convert.ToBoolean(active),Int32.Parse(budget));
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            model.AddActivity();
             return RedirectToAction(actionName: "Welcome", controllerName: "Home", new
             {
                 DisplayDate = SessionUser.Instance.date.ToString("yyyy-MM-dd"),
                 deb = 0,
             });
         }
+
 
         [HttpGet]
         public IActionResult EditEntryDialog(int id)
@@ -98,17 +113,10 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.Controllers
             return View();
     }
 
-        public IActionResult EditEntry(string code, string time, string description, string count, string date)
+        public IActionResult EditEntry(string code, int time, string description, string count, string date)
         {
             int temp = Int32.Parse(count);
-
-            //if (DataBase.Instance.GetEntry(temp) != null)
-            //{
-                //Entry entryToEdit = DataBase.Instance.GetEntry(temp);
-                //EditEntryModel model = new EditEntryModel(entryToEdit.date, entryToEdit.code, entryToEdit.time, entryToEdit.description);
-                //return View(model);
-                DataBase.Instance.EditEntry(code,Int32.Parse(time),description,temp); 
-            //}
+            DataBase.Instance.EditEntry(code,time,description,temp); 
             return RedirectToAction(actionName: "Welcome", controllerName: "Home", new
             {
                 DisplayDate = date,

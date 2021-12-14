@@ -79,7 +79,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 
             foreach(var user in users)
             {
-                //if(user.Name == DataBase.Instance.sessionUserName)
                 if (user.Name == SessionUser.Instance.userName)
 
                 {
@@ -92,8 +91,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
 
         public void AddEntry(string date, string code, int time, string description)
         {
-            // for user in users
-            // if user.name == sessionuser.name
             foreach(User user in users)
             {
                 if(user.Name ==SessionUser.Instance.userName)
@@ -111,9 +108,6 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
                     toEdit.code = code;
                     toEdit.time = time;
                     toEdit.description = description;
-                     
-                    //user.GetEntry(count).time = time;
-                    //user.GetEntry(count).description = description;
                 }
  
             }
@@ -128,8 +122,7 @@ namespace EGUI2021Z_ABASS_SULIAMAN_LAB2.DataStructure
                     {
 
                         user.DeleteEntry(id);
-                        //user.GetEntry(count).time = time;
-                        //user.GetEntry(count).description = description;
+
                     }
 
                 }

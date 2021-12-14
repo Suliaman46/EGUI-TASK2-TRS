@@ -12,61 +12,63 @@
 @{
     ViewData["Title"] = "Add Activity";
 }
+@model EGUI2021Z_ABASS_SULIAMAN_LAB2.Models.AddActivityDialogModel  
 
 
-<form method = "POST" asp-action="AddActivity">
+<form method = "POST" asp-action="AddActivityDialog">
     <div class="border p-4 border-primary">
 
         <div class:"form-group row">
             <h2 class="text-black-70 pl-3">Add Entry</h2>
         </div>
         <div class = "col-md-6">
-            <div class="input-group mb-2">
+            <div class="input-group mb-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Code :   </span>
                 </div>
                 <input type="text" class="form-control" id="code" name = "code">
-                @*<input asp-for="code" type="text" class="form-control" >*@
             </div>
         </div>
-            
+        <span asp-validation-for="code" class="text-danger"></span>
+
         <div class = "col-md-6">
-            <div class="input-group mb-2">
+            <div class="input-group mb-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Name :   </span>
                 </div>
                 <input type="text" class="form-control" id="name" name = "name">
-                @*<input asp-for="time" type="text" class="form-control">*@
             </div>
         </div>
-
+        <span asp-validation-for="name" class="text-danger"></span>
         <div class = "col-md-6" >
-            <div class="input-group mb-3">
+            <div class="input-group mb-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Manager :   </span>
                 </div>
                 <input type="text" class="form-control" id="manager" name = "manager">
-                @*<input asp-for="manager" type="text" class="form-control">*@
             </div>
+
         </div>
+        <span asp-validation-for="manager" class="text-danger"></span>
+
         <div class = "col-md-6" >
-            <div class="input-group mb-3">
+            <div class="input-group mb-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Active :   </span>
                 </div>
                 <input type="text" class="form-control" id="active" name = "active">
-                @*<input asp-for="active" type="text" class="form-control" >*@
             </div>
         </div>
+         <span asp-validation-for="active" class="text-danger"></span>
         <div class = "col-md-6" >
-            <div class="input-group mb-3">
+            <div class="input-group mb-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Budget :   </span>
                 </div>
                 <input type="text" class="form-control" id="budget" name = "budget">
-                @*<input asp-for="budget" type="text" class="form-control">*@
             </div>
         </div>
+        <span asp-validation-for="budget" class="text-danger"></span>
         <div class="form-group row">
             <div class="col-8 offset-2 row">
                 <div class="col">
